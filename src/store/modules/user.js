@@ -55,9 +55,12 @@ const user = {
                 getInfo()
                     .then(response => {
                         const result = response.result
-                        if (result.role && result.role.permissions.length > 0) {
+                        console.log('role:' + result.role)
+                        console.log('length:' + result.role.permissionList.length)
+                        if (result.role && result.role.permissionList.length > 0) {
+                            console.log('user info' + result)
                             const role = result.role
-                            role.permissions = result.role.permissions
+                            role.permissions = result.role.permissionList
                             role.permissions.map(per => {
                                 if (per.actionEntitySet != null && per.actionEntitySet.length > 0) {
                                     const action = per.actionEntitySet.map(action => {

@@ -20,6 +20,7 @@ router.beforeEach((to, from, next) => {
     /* has token */
     if (to.path === '/user/login') {
       next({ path: defaultRoutePath })
+      console.log('=________________=')
       NProgress.done()
     } else {
       if (store.getters.roles.length === 0) {
@@ -28,6 +29,7 @@ router.beforeEach((to, from, next) => {
           .then(res => {
             const roles = res.result && res.result.role
             console.dir(roles)
+            console.log('-================-' + roles)
             store.dispatch('GenerateRoutes', { roles }).then(() => {
               // 根据roles权限生成可访问的路由表
               // 动态添加可访问路由表
