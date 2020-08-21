@@ -128,6 +128,7 @@
 
 <script>
 // import { oneStep } from '@/api/login'
+import { selectCompany } from '@/api/estate'
 
 export default {
     name: 'Step1',
@@ -161,8 +162,19 @@ export default {
         }
     },
     created() {
-        var arr = ['海淀子公司', '海淀子公司', '海淀子公司3', '海淀子公司99']
-        this.select = arr
+        selectCompany()
+            .then(res => {
+                this.select = res.result
+            })
+            // eslint-disable-next-line handle-callback-err
+            .catch(err => {
+                this.$notification['error']({
+                    message: '错误',
+                    description: err.toString(),
+                    duration: 1
+                })
+            })
+            .finally()
     },
     methods: {
         nextStep() {
